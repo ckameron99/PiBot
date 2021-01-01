@@ -11,27 +11,20 @@ class API():
         self.robot=robot
         self.connected=False
         self.listeningDaemon=threading.Thread(target=self.listen, daemon=True, args=(1,))
+        self.listeningDaemon.start()
 
-    def attemptConnect(self):
-        if not self.connected:
-            self.listeningDaemon=threading.Thread(target=self.listen, daemon=True, args=(1,))
-            self.connected=True
-            try:
-                self.sendData(b'initConnection: True')
-                self.connected=True
-                return True
-            except ConnectionRefusedError:
-                self.connected=False
-                return False
-        return True
+    def initConnection(self,i):
+        self.connected=i==b'True'
+
 
     def listen(self, name):
         s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind((self.appID, self.listenPort))
-        s.listen
+        s.listen()
         while True:
             data=''
             conn,addr=s.accept()
+            self.appIP=addr[0]
             with conn:
                 while True:
                     newData=conn.recv(1024)
@@ -46,7 +39,8 @@ class API():
         key=data[:splitIndex]
         params=data[splitIndex+2:]
         funcs={
-        b'powerOptions': robot.powerOptions
+        b'powerOptions': robot.powerOptions,
+        b'initConnection': self.initConnection
         }
         funcs[key](params)
 
