@@ -19,7 +19,7 @@ class API():
 
     def listen(self, name):
         s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind((self.appIP, self.listenPort))
+        s.bind((self.robotIP, self.listenPort))
         s.listen()
         while True:
             data=''
