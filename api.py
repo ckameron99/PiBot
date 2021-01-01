@@ -15,6 +15,7 @@ class API():
 
     def initConnection(self,i):
         self.connected=i==b'True'
+        self.sendData(b'connectionStatus: True')
 
 
     def listen(self, name):
