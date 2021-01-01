@@ -23,7 +23,7 @@ class API():
         s.bind((self.robotIP, self.listenPort))
         s.listen()
         while True:
-            data=''
+            data=b''
             conn,addr=s.accept()
             self.appIP=addr[0]
             with conn:
