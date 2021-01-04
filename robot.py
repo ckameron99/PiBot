@@ -1,5 +1,7 @@
 import os
 import remote
+import api
+import time
 
 class robot():
     def __init__(self):
