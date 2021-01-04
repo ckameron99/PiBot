@@ -1,8 +1,10 @@
 import os
+import remote
 
 class robot():
     def __init__(self):
         self.api=api.API(self)
+        self.remote=robot.remote()
 
     def powerOptions(self,option):
         if option=='reboot':
@@ -13,7 +15,11 @@ class robot():
             os.system("git pull && sudo reboot")
 
     def connectRemote(self,option):
-        pass
+        self.remote.connect()
+        if self.remote.connected:
+            self.api.sendData(b'remoteStatus: SUCCESS')
+        else:
+            self.api.sendData(b'remoteStatus: FAILED')
 
     def connectLidar(self,option):
         pass
