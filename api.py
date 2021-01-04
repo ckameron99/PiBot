@@ -40,7 +40,7 @@ class API():
         key=data[:splitIndex]
         params=data[splitIndex+2:]
         funcs={
-        b'powerOptions': robot.powerOptions,
+        b'powerOptions': self.robot.powerOptions,
         b'initConnection': self.initConnection
         }
         funcs[key](params)
