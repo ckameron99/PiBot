@@ -41,7 +41,12 @@ class API():
         params=data[splitIndex+2:]
         funcs={
         b'powerOptions': self.robot.powerOptions,
-        b'initConnection': self.initConnection
+        b'initConnection': self.initConnection,
+        b'connectRemote': self.robot.connectRemote,
+        b'connectLidar': self.robot.connectLidar,
+        b'connectOrientation': self.robot.connectOrientation,
+        b'connectMotors': self.robot.connectMotors,
+
         }
         funcs[key](params)
 
