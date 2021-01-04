@@ -6,7 +6,7 @@ import time
 class robot():
     def __init__(self):
         self.api=api.API(self)
-        self.remote=remote.remote()
+        self.remote=remote.remote(self)
 
     def powerOptions(self,option):
         if option=='reboot':
