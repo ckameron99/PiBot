@@ -2,6 +2,7 @@
 Python 3.6
 PyAudio==0.2.11
 SpeechRecognition==3.8.1
+deepspeech==0.9.3
 '''
 
 
