@@ -1,11 +1,8 @@
 import api
+import robot
 import time
-class robot():
-    def __init__(self):
-        self.api=api.API(self)
+import os
 
-    def powerOptions(self,option):
-        pass
-r=robot()
+r=robot.robot()
 while True:
     time.sleep(10)
