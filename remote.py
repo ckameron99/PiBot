@@ -25,7 +25,7 @@ class remote():
             charac_dict=controlServices.getCharacteristics() # bluetooth characteristincs
 
             while True:
-                charac1, charac2, charac3 = [charac.read() for charac in characDict]
+                charac1, charac2, charac3 = [charac.read() for charac in charac_dict]
                 status_code = struct.unpack('H', charac1[:2])[0] #extract binaire and do the handling
                 #print(status_code)
 
