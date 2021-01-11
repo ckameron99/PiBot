@@ -1,4 +1,3 @@
-import selfupdate
 import socket
 import threading
 
