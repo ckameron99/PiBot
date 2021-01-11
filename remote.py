@@ -41,7 +41,7 @@ class remote():
                     right_push = int(bar_status_bin[30:40], 2)
 
 
-                    """
+
                     #DEBUG and PRINT value from joystick
 
                     print("status %s" % status_code, end='  ')
@@ -51,7 +51,7 @@ class remote():
                     print("right_drag %s" % right_drag, end='  ')
                     print("left_push %s" % left_push, end='  ')
                     print("right_push %s" % right_push, end='\r')
-                    """
+                    
 
 
 
