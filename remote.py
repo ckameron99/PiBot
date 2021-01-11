@@ -19,7 +19,7 @@ class remote():
     def debugInput(self): #remove for final production. For use to reverse engineer protocol
         services=self.gamesir.getServices()
         services=list(services)
-        for s in services:
+        for s in [services[2]]: # only use the second service?
             #sList=list(s)
             controlServices=s
             charac_dict=controlServices.getCharacteristics() # bluetooth characteristincs
@@ -51,7 +51,7 @@ class remote():
                     print("right_drag %s" % right_drag, end='  ')
                     print("left_push %s" % left_push, end='  ')
                     print("right_push %s" % right_push, end='\r')
-                    
+
 
 
 
