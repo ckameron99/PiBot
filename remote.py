@@ -18,6 +18,7 @@ class remote():
 
     def debugInput(self): #remove for final production. For use to reverse engineer protocol
         services=self.gamesir.getServices()
+        services=list(services)
         for s in services:
             #sList=list(s)
             controlServices=s
