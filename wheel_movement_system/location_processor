@@ -1,0 +1,74 @@
+import math
+
+
+#in case the field changes
+field_width = 1.5
+field_height = 1.5
+
+
+class Vector2D:
+  def __init__(self, inputX, inputY):
+    self.x = inputX;
+    self.y = inputY;
+
+  def __add__(self, rightHand):
+    return Vector2D( self.x + rightHand.x, self.y + rightHand.y );
+
+  def __iadd__(self, rightHand):
+    self.x += rightHand.x;
+    self.y += rightHand.y;
+
+  def __sub__(self, rightHand):
+    return Vector2D( self.x - rightHand.x, self.y - rightHand.y );
+
+  def __isub__(self, rightHand):
+    self.x -= rightHand.x;
+    self.y -= rightHand.y;
+
+  def __mul__(self, number):
+    return Vector2D( self.x * number, self.y * number );
+
+  def __rmul__(self, number):
+    return self * number;
+
+  def __truediv__(self, number):
+    return Vector2D( self.x / number, self.y / number );
+
+  def dot(self, rightHand):
+    return self.x * rightHand.x + self.y * rightHand.y;
+
+  def cross_value(self, rightHand):
+    return self.x * rightHand.x - self.y * rightHand.y;
+
+  def __str__( self ):
+    return "( {}, {} )".format( self.x, self.y );
+
+  def abs( self ):
+    return math.sqrt( x*x + y*y );
+
+  def normalized( self ):
+    return self / self.abs();
+
+  def rotate( self, angle_antiClockwise ):
+    return Vector2D( self.x*math.cos(angle_antiClockwise) - self.y*math.sin(angle_antiClockwise), self.x*math.sin(angle_antiClockwise) + self.y*math.cos(angle_antiClockwise) );
+
+
+def find_position( d, theta, a = [Vector2D(0,0.1), Vector2D(0.1,0), Vector2D(0,-0.1), Vector2D(-0.1,0)], b = [Vector2D(0,1), Vector2D(1,0), Vector2D(0,-1), Vector2D(-1,0)], senserNumber = 4 ):
+  """ 
+  Args: 
+      d0 to d3. the distances each senser finds
+      a0 to a3 (Vector2D) location vectors of each sensor in the robot's own coordinate (const after robot is made)
+      b0 to b3 (Vector2D) the orientation of each sensor in the robot's own coordinate (const after robot is made)
+      (a, b are used in case there are manufacturaling accidents)
+      theta is the bearing. Anticlockwise from the front face to normal of north wall. unit: rad
+      senserNumber is usually 4, but if some sensers are broken in a fight, or extral sensers are added, change it.
+  Return:
+      x, y (in Vector2D)
+      origin is located at north-west cornor
+      direction of x: west to east
+      direction of y: north to south
+  """
+  XofWall = [ (a[i] + d[i]*b[i]).dot(Vector2D( 1, 0 ).rotate( -theta )) for i in range( senserNumber ) ];
+  YofWall = [ (a[i] + d[i]*b[i]).dot(Vector2D( 0, 1 ).rotate( -theta )) for i in range( senserNumber ) ];
+
+  return Vector2D( -min(XofWall), max(YofWall) );
