@@ -2,6 +2,8 @@ import os
 import remote
 import api
 import time
+import zeroborg
+import diablo
 
 class robot():
     def __init__(self):
@@ -30,4 +32,7 @@ class robot():
         pass
 
     def connectMotors(self,option):
-        pass
+        self.d=diablo.Diablo()
+        self.d.Init()
+        self.z=zeroborg.Zeroborg()
+        self.z.Init()
