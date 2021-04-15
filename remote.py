@@ -1,8 +1,7 @@
-import remote
 import bluepy
 import struct
 
-class remote():
+class remote:
     def __init__(self,robot=None):
         self.connected=False
         self.robot=robot
@@ -15,6 +14,7 @@ class remote():
             return True
         except bluepy.btle.BTLEDisconnectError:
             return False
+
 
     def debugInput(self): #remove for final production. For use to reverse engineer protocol
         services=self.gamesir.getServices()
@@ -51,14 +51,3 @@ class remote():
                     print("right_drag %s" % right_drag, end='  ')
                     print("left_push %s" % left_push, end='  ')
                     print("right_push %s" % right_push, end='\r')
-
-
-
-
-def main():
-    r=remote()
-    print(r.connect())
-    r.debugInput()
-
-if __name__=="__main__":
-    main()
