@@ -11,11 +11,20 @@ class DemoStuff:
         self.r.connect()
         th.start_new_thread(self.r.ConstantUpdate, ())
 
-        #### DO Stufff
+        """#### DO Stufff
         if self.r.StuffBeingPressed["A"]:
             pass
             #Do stuff
         ### More stuff
+        
+        # Example with Function calling
+        self.x = 0
+        def add():
+            self.x += 1
+        
+        r.FuncsToDo["A"] = add"""
+        
+        
 
 
 
@@ -28,6 +37,10 @@ class remote:
         self.StuffBeingPressed = {"A": False, "B": False, "Y": False, "X": False, "L1": False, "L2": False,
                                   "R1": False, "R2": False, "C1": False, "C2": False, "Menu": False, "UP-D": False,
                                   "L-Stick": (0, 0), "R-Stick": (0, 0)}
+        
+        self.FuncsToDo = {"A": None, "B": None, "Y": None, "X": None, "L1": None, "L2": None,
+                                  "R1": None, "R2": None, "C1": None, "C2": None, "Menu": None, "UP-D": None,
+                                  "L-Stick": None, "R-Stick": None}
 
     def connect(self):
         if self.connected:
@@ -67,24 +80,32 @@ class remote:
 
                     if (on_press_key & 1) != 0:
                         self.StuffBeingPressed["A"] = True
+                        if self.FuncsToDo["A"] is not None:
+                            self.FuncsToDo["A"]()
                         # print("A pressed")
                     else:
                         self.StuffBeingPressed["A"] = False
 
                     if (on_press_key & 2) != 0:
                         self.StuffBeingPressed["B"] = True
+                        if self.FuncsToDo["B"] is not None:
+                            self.FuncsToDo["B"]()
                         # print("B pressed")
                     else:
                         self.StuffBeingPressed["B"] = False
 
                     if (on_press_key & 16) != 0:
                         self.StuffBeingPressed["Y"] = True
+                        if self.FuncsToDo["Y"] is not None:
+                            self.FuncsToDo["Y"]()
                         # print("Y pressed")
                     else:
                         self.StuffBeingPressed["Y"] = False
 
                     if (on_press_key & 8) != 0:
                         self.StuffBeingPressed["X"] = True
+                        if self.FuncsToDo["X"] is not None:
+                            self.FuncsToDo["X"]()
                         # print("X pressed")
                     else:
                         self.StuffBeingPressed["X"] = False
