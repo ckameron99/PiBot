@@ -139,13 +139,18 @@ class remote:
                     if left_push != 512 or left_drag != 512:
                         x = (left_drag - 512) / 512
                         y = (512 - left_push) / 512
-                        print(f'Vector direction of lstick is ({x},{y})')
+                        self.StuffBeingPressed["L-Stick"] = (x,y)
+                        #print(f'Vector direction of lstick is ({x},{y})')
+                    else:
+                        self.StuffBeingPressed["L-Stick"] = (0,0)
 
                     if right_push != 512 or right_drag != 512:
                         x = (right_drag - 512) / 512
                         y = (512 - right_push) / 512
-                        print(f'Vector direction of lstick is ({x},{y})')
-
+                        self.StuffBeingPressed["R-Stick"] = (x,y)
+                        #print(f'Vector direction of lstick is ({x},{y})')
+                    else:
+                        self.StuffBeingPressed["R-Stick"] = (0,0)
                     # DEBUG and PRINT value from joystick
 
     def UsefulldebugInput(self):  # remove for final production. For use to reverse engineer protocol
